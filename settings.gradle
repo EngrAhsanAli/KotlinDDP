@@ -1,0 +1,3 @@
+rootProject.name = "Kotlin DDP"
+include ':app'
+include ':meteorddp'
