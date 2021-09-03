@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val meteor = Meteor.createInstance("ws://52.199.85.68:4000/websocket", context = this)
+        val meteor = Meteor.createInstance("ws://localhost:4000/websocket", context = this)
 
         val btnConnect = findViewById<TextView>(R.id.btnConnect)
         btnConnect.setOnClickListener {
