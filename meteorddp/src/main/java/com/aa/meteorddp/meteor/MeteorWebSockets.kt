@@ -41,7 +41,7 @@ open class MeteorWebSockets(url: String, timeout: Int) {
             ) {
                 super.onDisconnected(websocket, serverCloseFrame, clientCloseFrame, closedByServer)
                 isConnected = false
-                onEvent?.invoke(WebSocketEvent.connected, false)
+                onEvent?.invoke(WebSocketEvent.disconnected, false)
                 logger.log(MeteorLogger.LogTags.socket, "Disconnected", MeteorLogger.Level.info)
             }
 

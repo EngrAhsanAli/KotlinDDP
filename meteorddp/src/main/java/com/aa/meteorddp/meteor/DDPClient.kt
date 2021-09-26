@@ -5,6 +5,7 @@ import com.aa.meteorddp.helper.Constants.*
 import com.aa.meteorddp.helper.Error
 import com.aa.meteorddp.helper.MongoDb
 import com.aa.meteorddp.helper.valueToString
+import com.google.gson.internal.LinkedTreeMap
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.collections.set
@@ -97,7 +98,7 @@ open class DDPClient(
         openConnection(true)
     }
 
-    private fun isLoginResult(result: HashMap<*, *>): Boolean =
+    private fun isLoginResult(result: LinkedTreeMap<*, *>): Boolean =
         result.containsKey(Field.TOKEN) && result.containsKey(Field.ID)
 
     private fun openConnection(isReconnect: Boolean) =
@@ -518,11 +519,11 @@ open class DDPClient(
                     null
                 }
                 mCallbackProxy.onDataRemoved(collectionName, documentID)
-            } else if (message == Message.RESULT) { // check if we have to process any result data internally
+            } else if (message == Message.RESULT) {
                 if (map.containsKey(Field.RESULT)) {
-                    // TODO:- MAYBE WORK, NEED TESTING
                     val resultData =
-                        map[Field.RESULT] as HashMap<*, *>?
+                        map[Field.RESULT] as LinkedTreeMap<*, *>?
+
                     // if the result is from a previous login attempt
                     resultData?.let {
                         if (isLoginResult(it)) {
@@ -559,7 +560,7 @@ open class DDPClient(
             } else if (message == Message.READY) {
                 if (map.containsKey(Field.SUBS)) {
                     // TODO:- NEED TO TEST
-                    val elements = map[Field.SUBS] as HashMap<*, *>?
+                    val elements = map[Field.SUBS] as LinkedTreeMap<*, *>?
                     // if the result is from a previous login attempt
                     elements?.let {
 
