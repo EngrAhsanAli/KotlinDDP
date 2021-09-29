@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity(), MeteorCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val meteor = Meteor.createInstance("ws://localhost:4000/websocket", context = this)
+        val meteor = Meteor.createInstance("ws://52.199.85.68:4000/websocket", context = this)
 
         meteor!!.addCallback(this)
         val btnConnect = findViewById<TextView>(R.id.btnConnect)
@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity(), MeteorCallback {
 
         val btnCheckAttrs = findViewById<TextView>(R.id.btnCheckAttrs)
         btnCheckAttrs.setOnClickListener {
-            meteor.call("demoMethod", listener = object: ResultListener {
+            meteor.call("getConfigurationsSso", listener = object: ResultListener {
                 override fun onSuccess(result: String?) {
-                    println(result.toString())
+                    println(result)
                 }
 
                 override fun onError(error: String?, reason: String?, details: String?) {
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), MeteorCallback {
 
             })
 
-            meteor.subscribe("subscribeDemo")
+//            meteor.subscribe("subscribeDemo")
 
         }
 
